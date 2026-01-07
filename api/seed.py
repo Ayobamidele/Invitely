@@ -1,5 +1,5 @@
-from app.database import SessionLocal, engine
-from app import models
+from api.db import SessionLocal, engine
+from api import models
 from datetime import datetime
 
 # Create tables (only needed once)
@@ -12,7 +12,7 @@ def seed():
         #  one user
         user = models.User(
             name="Stephen",
-            email="Stephen@.com",
+            email="Stephen@gmail.com",
             password="password123"  
         )
         db.add(user)
