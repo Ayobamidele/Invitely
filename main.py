@@ -5,4 +5,6 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return JSONResponse(content={"message": "Hello from FastAPI on Vercel!"})
+    return JSONResponse(content={"message": "Hello from FastAPI !"})
+
+print("Server running on http://localhost:8000")

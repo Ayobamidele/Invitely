@@ -1,4 +1,4 @@
-from api.db import SessionLocal, engine
+from api.db import session_local, engine
 from api import models
 from datetime import datetime
 
@@ -6,7 +6,7 @@ from datetime import datetime
 models.Base.metadata.create_all(bind=engine)
 
 def seed():
-    db = SessionLocal()
+    db = session_local()
 
     try:
         #  one user
