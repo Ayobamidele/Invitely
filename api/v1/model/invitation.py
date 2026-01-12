@@ -8,7 +8,6 @@ from sqlalchemy.event import listens_for
 class Invitation(BaseModel):
     __tablename_ = "Invitation"
     event_id = Column(Integer, ForeignKey)
-    id = Column(Integer, primary_key=True) 
     email = Column(String, nullable=False) 
     
     event = relationship("Event", back_populates="Invitations") # type: ignore

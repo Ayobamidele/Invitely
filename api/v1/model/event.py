@@ -9,7 +9,6 @@ from sqlalchemy.event import listens_for
 
 class Event(BaseModel):
     __tablename__  = 'events'
-    id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)  
     datetime = Column(DateTime, nullable=False)
     longitude = Column(Float, nullable=False)
