@@ -7,4 +7,5 @@ app = FastAPI()
 def read_root():
     return JSONResponse(content={"message": "Hello from FastAPI !"})
 
-print("Server running on http://localhost:8000")
+
+

@@ -1,13 +1,13 @@
 from enum import StrEnum
-from sqlalchemy import Column, Float, Integer, String, DateTime, ForeignKey
+from sqlalchemy import Column, Float, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base 
 from sqlalchemy.sql import func
 import hashlib
-from api.db.db_model import Base
+from .base import BaseModel
 from sqlalchemy.event import listens_for
 
 
-class Event(Base):
+class Event(BaseModel):
     __tablename__  = 'events'
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False)  
@@ -15,4 +15,7 @@ class Event(Base):
     longitude = Column(Float, nullable=False)
     latitude = Column(Float, nullable=False)
     guest_count = Column(Integer, nullable=True)
-attendee_type = Column(StrEnum(Attendee_type), nullable=True)  # type: ignore
+    attendee_type = Column(StrEnum(Attendee_type), nullable=True)  # type: ignore
+    
+    invitations = relationship("Invitation", back_populates="event") # type: ignore
+    
