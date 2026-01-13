@@ -1,28 +1,38 @@
-from api.db import session_local, engine
-from api import models
+from api.db.db import session_local, engine
+from api import model
 from datetime import datetime
 
-# Create tables (only needed once)
-models.Base.metadata.create_all(bind=engine)
+# seed.py
+from datetime import datetime
+
+
+model.Base.metadata.create_all(bind=engine)
+
 
 def seed():
     db = session_local()
 
     try:
-        #  one user
+        
+        db.query(model.Invitation).delete()
+        db.query(model.Event).delete()
+        db.query(model.User).delete()
+        db.commit()
+
+        
         user = models.User(
             name="Stephen",
-            email="Stephen@gmail.com",
-            password="password123"  
+            email="stephen@gmail.com",
+            password="password123"
         )
         db.add(user)
         db.commit()
         db.refresh(user)
 
-        #  Create one event
+        # Create one event
         event = models.Event(
-            title="Wedding_Party",
-            description="Stephen Wedding celebration",
+            title="Wedding Party",
+            description="Stephen wedding celebration",
             date=datetime(2026, 1, 10),
             owner_id=user.id
         )
@@ -30,12 +40,12 @@ def seed():
         db.commit()
         db.refresh(event)
 
-        #  five invitations
+        # Create five invitations
         invitations = [
             models.Invitation(
                 email=f"guest{i}@example.com",
-                event_id=event.id,
-                status="pending"
+                status="pending",
+                event_id=event.id
             )
             for i in range(1, 6)
         ]
@@ -43,11 +53,11 @@ def seed():
         db.add_all(invitations)
         db.commit()
 
-        print("successfully!")
+        print("Seed completed successfully!")
 
     except Exception as e:
         db.rollback()
-        print("failed:", e)
+        print("Seed failed:", e)
 
     finally:
         db.close()
