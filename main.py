@@ -4,5 +4,5 @@ from fastapi.responses import JSONResponse
 app = FastAPI()
 
 @app.get("/")
-def read_root():
-    return JSONResponse(content={"message": "Hello from FastAPI on Vercel!"})
+def home():
+    return {"message": "Hello from Invitely!"}
