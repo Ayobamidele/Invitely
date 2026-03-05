@@ -42,6 +42,7 @@ venv/
 env/
 .venv/
 .env/
+.env
 
 # FastAPI-specific or project-specific ignores
 # IDE-specific files (optional, can use .gitignore.io for specific IDEs like PyCharm, VS Code)
